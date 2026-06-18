@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Mini Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo">amazon<span>.in</span></div>
+
+        <div class="location">
+            <p>Deliver to</p>
+            <b>India</b>
+        </div>
+
+        <div class="searchBox">
+            <select>
+                <option>All</option>
+                <option>Electronics</option>
+                <option>Fashion</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Search Amazon">
+            <button onclick="searchProduct()">Search</button>
+        </div>
+
+        <div class="navText">
+            <p>Hello, sign in</p>
+            <b>Account</b>
+        </div>
+
+        <div class="navText">
+            <p>Returns</p>
+            <b>& Orders</b>
+        </div>
+
+        <div class="cart" onclick="showCart()">
+            Cart <span id="cartCount">0</span>
+        </div>
+    </div>
+
+    <div class="menu">
+        <span>All</span>
+        <span>Fresh</span>
+        <span>Mobiles</span>
+        <span>Sell</span>
+        <span>Best Sellers</span>
+        <span>Today's Deals</span>
+        <span>Customer Service</span>
+    </div>
+
+    <div class="hero">
+        <div class="heroText">
+            <h1>Welcome to Amazon Mini Store</h1>
+            <p>This is a simple front end project made using HTML, CSS and JavaScript.</p>
+        </div>
+    </div>
+
+    <div class="message" id="messageBox">
+        You are on amazon mini project. Click add to cart button.
+    </div>
+
+    <div class="products" id="productList">
+        <div class="box" data-name="headphones">
+            <h2>Headphones</h2>
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80" alt="headphones">
+            <p class="price">Rs. 999</p>
+            <button onclick="addCart('Headphones')">Add to cart</button>
+        </div>
+
+        <div class="box" data-name="smart watch">
+            <h2>Smart Watch</h2>
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80" alt="watch">
+            <p class="price">Rs. 1499</p>
+            <button onclick="addCart('Smart Watch')">Add to cart</button>
+        </div>
+
+        <div class="box" data-name="shoes">
+            <h2>Shoes</h2>
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80" alt="shoes">
+            <p class="price">Rs. 1299</p>
+            <button onclick="addCart('Shoes')">Add to cart</button>
+        </div>
+
+        <div class="box" data-name="mobile phone">
+            <h2>Mobile Phone</h2>
+            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80" alt="phone">
+            <p class="price">Rs. 15999</p>
+            <button onclick="addCart('Mobile Phone')">Add to cart</button>
+        </div>
+
+        <div class="box" data-name="laptop">
+            <h2>Laptop</h2>
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=500&q=80" alt="laptop">
+            <p class="price">Rs. 45999</p>
+            <button onclick="addCart('Laptop')">Add to cart</button>
+        </div>
+
+        <div class="box" data-name="bag">
+            <h2>School Bag</h2>
+            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=500&q=80" alt="bag">
+            <p class="price">Rs. 799</p>
+            <button onclick="addCart('School Bag')">Add to cart</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Back to top</p>
+        <p>Amazon Mini Project | Made for practice</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
