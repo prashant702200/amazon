@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodVerse - Premium Food Delivery</title>
+  <meta name="description" content="FoodVerse - Premium Food Delivery Application by Prashant Singh">
+  <meta name="author" content="Prashant Singh">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
+</head>
+<body>
+  <!-- ======== Loading Screen ======== -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">Food<span>Verse</span></div>
+    <p class="loading-tagline">Your Universe of Flavors</p>
+    <div class="loading-spinner"></div>
+  </div>
+  <!-- ======== Navbar ======== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-left">
+      <a href="#" class="logo" onclick="navigateToSection('home')">
+        <i class="fas fa-utensils"></i> Food<span>Verse</span>
+      </a>
+      <div class="location-selector" id="locationBtn">
+        <i class="fas fa-map-marker-alt"></i>
+        <span class="loc-text" id="locationText">Delhi</span>
+        <i class="fas fa-chevron-down" style="font-size:0.7rem; margin-left:2px;"></i>
+        <ul class="location-dropdown" id="locationDropdown"></ul>
+      </div>
+    </div>
+    <div class="nav-center">
+      <a href="#" class="nav-link active" data-nav="home">Home</a>
+      <a href="#" class="nav-link" data-nav="restaurants">Restaurants</a>
+      <a href="#" class="nav-link" data-nav="offers">Offers</a>
+      <a href="#" class="nav-link" data-nav="categories">Categories</a>
+      <a href="#" class="nav-link" data-nav="orders">Orders</a>
+      <a href="#" class="nav-link" data-nav="favorites">Favorites</a>
+      <a href="#" class="nav-link" data-nav="about">About</a>
+      <a href="#" class="nav-link" data-nav="contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="navSearchInput" placeholder="Search restaurants, food...">
+      </div>
+      <button class="nav-icon-btn" id="darkModeToggle" title="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button class="nav-icon-btn" id="favNavBtn" onclick="navigateToSection('favorites')" title="Favorites">
+        <i class="fas fa-heart"></i>
+        <span class="badge" id="favBadge" style="display:none;">0</span>
+      </button>
+      <button class="nav-icon-btn" id="cartBtn" title="Cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge" id="cartBadge" style="display:none;">0</span>
+      </button>
+      <div class="profile-btn" title="Profile">PS</div>
+      <div class="hamburger" id="hamburgerBtn">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+  <!-- ======== Mobile Sidebar ======== -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="#" class="logo" onclick="navigateToSection('home'); closeSidebar();">
+        <i class="fas fa-utensils"></i> Food<span>Verse</span>
+      </a>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sidebar-links">
+      <a href="#" class="sidebar-link active" data-nav="home"><i class="fas fa-home"></i> Home</a>
+      <a href="#" class="sidebar-link" data-nav="restaurants"><i class="fas fa-store"></i> Restaurants</a>
+      <a href="#" class="sidebar-link" data-nav="offers"><i class="fas fa-tags"></i> Offers</a>
+      <a href="#" class="sidebar-link" data-nav="categories"><i class="fas fa-th-large"></i> Categories</a>
+      <a href="#" class="sidebar-link" data-nav="orders"><i class="fas fa-receipt"></i> Orders</a>
+      <a href="#" class="sidebar-link" data-nav="favorites"><i class="fas fa-heart"></i> Favorites</a>
+      <a href="#" class="sidebar-link" data-nav="about"><i class="fas fa-user"></i> About</a>
+      <a href="#" class="sidebar-link" data-nav="contact"><i class="fas fa-envelope"></i> Contact</a>
+      <div class="sidebar-link" id="sidebarDarkToggle"><i class="fas fa-moon"></i> Dark Mode</div>
+    </div>
+  </div>
+  <!-- ======== Hero Section ======== -->
+  <section class="hero page-section" id="heroSection">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text animate-slide-up">
+          <h1>Discover the <span class="highlight">Universe</span> of Delicious Food</h1>
+          <p>Order from the best restaurants near you. Lightning-fast delivery, amazing offers, and a world of flavors at your fingertips.</p>
+          <div class="hero-search-box">
+            <input type="text" id="heroSearchInput" placeholder="Search for restaurants, cuisines, dishes...">
+            <button class="hero-search-btn ripple">
+              <i class="fas fa-search"></i> Search
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="stat-num" data-count="500" data-suffix="+">0</div>
+              <div class="stat-label">Restaurants</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-num" data-count="10000" data-suffix="+">0</div>
+              <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-num" data-count="50" data-suffix="+">0</div>
+              <div class="stat-label">Cities</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=600&fit=crop" alt="Delicious Food">
+          </div>
+          <div class="hero-float-card card-1">
+            <div class="float-icon"><i class="fas fa-truck"></i></div>
+            <div class="float-text">
+              <strong>Fast Delivery</strong>
+              <span>Under 30 minutes</span>
+            </div>
+          </div>
+          <div class="hero-float-card card-2">
+            <div class="float-icon"><i class="fas fa-star"></i></div>
+            <div class="float-text">
+              <strong>Top Rated</strong>
+              <span>4.5+ avg rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======== Categories Section ======== -->
+  <section class="section page-section" id="categoriesSection">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">What's on your <span>mind?</span></h2>
+        <a class="view-all" onclick="navigateToSection('restaurants')">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="categories-grid reveal" id="categoriesGrid"></div>
+    </div>
+  </section>
+  <!-- ======== Offers Section ======== -->
+  <section class="section page-section" id="offersSection">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Best <span>Offers</span> For You</h2>
+        <a class="view-all">See All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="offers-scroll reveal" id="offersScroll"></div>
+    </div>
+  </section>
+  <!-- ======== Restaurants Section ======== -->
+  <section class="section page-section" id="restaurantsSection">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Popular <span>Restaurants</span></h2>
+      </div>
+      <div class="filters-bar reveal" id="filtersBar"></div>
+      <div class="restaurants-grid reveal" id="restaurantsGrid"></div>
+    </div>
+  </section>
+  <!-- ======== Trending Section ======== -->
+  <section class="section page-section" id="trendingSection">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Trending <span>Near You</span></h2>
+        <a class="view-all" onclick="navigateToSection('restaurants')">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="restaurants-grid reveal" id="trendingGrid"></div>
+    </div>
+  </section>
+  <!-- ======== Orders Section ======== -->
+  <section class="section page-section" id="ordersSection" style="display:none;">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Your <span>Orders</span></h2>
+      </div>
+      <div class="empty-state" style="padding:80px 20px;">
+        <i class="fas fa-receipt" style="font-size:4rem; color:#ddd; display:block; margin-bottom:16px;"></i>
+        <h4>No orders yet</h4>
+        <p style="color:var(--text-secondary);">Your order history will appear here once you place an order.</p>
+      </div>
+    </div>
+  </section>
+  <!-- ======== Favorites Section ======== -->
+  <section class="section page-section favorites-section" id="favoritesSection" style="display:none;">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Your <span>Favorites</span></h2>
+      </div>
+      <div class="restaurants-grid" id="favoritesGrid"></div>
+    </div>
+  </section>
+  <!-- ======== About Section ======== -->
+  <section class="about-section page-section" id="aboutSection" style="display:none;">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">About The <span>Developer</span></h2>
+      </div>
+      <div class="about-grid reveal">
+        <div class="dev-card">
+          <div class="dev-avatar">PS</div>
+          <h3>Prashant Singh</h3>
+          <p class="dev-role">Frontend Web Developer</p>
+          <p class="dev-phone"><i class="fas fa-phone"></i> +91 9236434940</p>
+          <div class="dev-socials">
+            <a href="#" class="dev-social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" class="dev-social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="dev-social-btn" title="Portfolio"><i class="fas fa-globe"></i></a>
+            <a href="mailto:prashantsingh@email.com" class="dev-social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+        <div class="about-info">
+          <h2>Building <span>FoodVerse</span></h2>
+          <p>
+            FoodVerse is a premium food delivery web application designed and developed by <strong>Prashant Singh</strong> as a professional college project. 
+            This project showcases modern front-end development skills including responsive design, interactive UI components, dynamic content rendering, 
+            and smooth user experiences — all built with pure HTML5, CSS3, and Vanilla JavaScript without any frameworks.
+          </p>
+          <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:14px;">Technical Skills</h3>
+          <div class="skills-grid">
+            <div class="skill-tag"><i class="fab fa-html5"></i> HTML5</div>
+            <div class="skill-tag"><i class="fab fa-css3-alt"></i> CSS3</div>
+            <div class="skill-tag"><i class="fab fa-js-square"></i> JavaScript</div>
+            <div class="skill-tag"><i class="fas fa-mobile-alt"></i> Responsive Design</div>
+            <div class="skill-tag"><i class="fas fa-paint-brush"></i> Modern UI/UX</div>
+            <div class="skill-tag"><i class="fas fa-code"></i> Web Development</div>
+          </div>
+          <div class="about-features">
+            <div class="about-feature">
+              <i class="fas fa-bolt"></i>
+              <h4>Fast & Smooth</h4>
+              <p>Optimized for performance with smooth animations</p>
+            </div>
+            <div class="about-feature">
+              <i class="fas fa-mobile-alt"></i>
+              <h4>Fully Responsive</h4>
+              <p>Works perfectly on all devices and screens</p>
+            </div>
+            <div class="about-feature">
+              <i class="fas fa-moon"></i>
+              <h4>Dark Mode</h4>
+              <p>Beautiful dark theme with local storage persistence</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======== Contact Section ======== -->
+  <section class="contact-section page-section" id="contactSection" style="display:none;">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Get In <span>Touch</span></h2>
+      </div>
+      <div class="contact-grid reveal">
+        <div class="contact-info-cards">
+          <div class="contact-card">
+            <div class="contact-card-icon"><i class="fas fa-user"></i></div>
+            <div>
+              <h4>Prashant Singh</h4>
+              <p>Frontend Web Developer</p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <h4>Phone</h4>
+              <p>+91 9236434940</p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h4>Email</h4>
+              <p>prashantsingh@email.com</p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h4>Location</h4>
+              <p>India</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3><i class="fas fa-paper-plane"></i> Send a Message</h3>
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" placeholder="John Doe" required>
+              </div>
+              <div class="form-group">
+                <label>Your Email</label>
+                <input type="email" placeholder="john@email.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <input type="text" placeholder="How can we help?">
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea rows="4" placeholder="Write your message..." required style="resize:vertical;"></textarea>
+            </div>
+            <button type="submit" class="contact-submit-btn ripple">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======== Footer ======== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo"><i class="fas fa-utensils"></i> Food<span>Verse</span></div>
+          <p>Your Universe of Flavors. Discover the best restaurants, cuisines and dishes delivered right to your doorstep. Built with passion by Prashant Singh.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#" onclick="navigateToSection('home')">Home</a></li>
+            <li><a href="#" onclick="navigateToSection('restaurants')">Restaurants</a></li>
+            <li><a href="#" onclick="navigateToSection('offers')">Offers</a></li>
+            <li><a href="#" onclick="navigateToSection('categories')">Categories</a></li>
+            <li><a href="#" onclick="navigateToSection('orders')">Orders</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="#">North Indian</a></li>
+            <li><a href="#">South Indian</a></li>
+            <li><a href="#">Chinese</a></li>
+            <li><a href="#">Italian</a></li>
+            <li><a href="#">Fast Food</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#">Prashant Singh</a></li>
+            <li><a href="tel:+919236434940">+91 9236434940</a></li>
+            <li><a href="mailto:prashantsingh@email.com">Email Us</a></li>
+            <li><a href="#" onclick="navigateToSection('about')">About</a></li>
+            <li><a href="#" onclick="navigateToSection('contact')">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 FoodVerse. All rights reserved. Designed & Developed by <span>Prashant Singh</span></p>
+      </div>
+    </div>
+  </footer>
+  <!-- ======== Menu Modal ======== -->
+  <div class="modal-overlay" id="menuModalOverlay">
+    <div class="modal" id="menuModal">
+      <div class="modal-header">
+        <img src="" alt="" id="modalRestImg">
+        <div class="modal-header-overlay">
+          <h2 id="modalRestName"></h2>
+          <p id="modalRestCuisine"></p>
+        </div>
+        <button class="modal-close" onclick="closeMenuModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="menu-section-title"><i class="fas fa-utensils" style="color:var(--primary)"></i> Menu</div>
+        <div id="menuList"></div>
+      </div>
+    </div>
+  </div>
+  <!-- ======== Cart Panel ======== -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+      <button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-body" id="cartBody"></div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-summary">
+        <div class="cart-summary-row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+        <div class="cart-summary-row"><span>Delivery Fee</span><span id="cartDelivery">₹40</span></div>
+        <div class="cart-summary-row"><span>GST (5%)</span><span id="cartGST">₹0</span></div>
+        <div class="cart-summary-row total"><span>Grand Total</span><span id="cartTotal">₹0</span></div>
+      </div>
+      <button class="checkout-btn ripple" id="checkoutBtn">
+        Proceed to Checkout <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+  <!-- ======== Checkout Modal ======== -->
+  <div class="modal-overlay" id="checkoutModalOverlay">
+    <div class="modal checkout-modal">
+      <button class="modal-close" onclick="closeCheckoutModal()" style="position:absolute; top:16px; right:16px; z-index:10;">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="checkout-form">
+        <h3><i class="fas fa-receipt"></i> Checkout</h3>
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="checkoutName" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="checkoutPhone" placeholder="+91 XXXXX XXXXX" required>
+        </div>
+        <div class="form-group">
+          <label>Delivery Address *</label>
+          <textarea id="checkoutAddress" rows="3" placeholder="Enter your complete delivery address" required style="resize:vertical;"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Payment Method</label>
+          <div class="payment-options">
+            <div class="payment-option active" onclick="selectPayment(this)">
+              <i class="fas fa-wallet"></i> UPI
+            </div>
+            <div class="payment-option" onclick="selectPayment(this)">
+              <i class="fas fa-credit-card"></i> Card
+            </div>
+            <div class="payment-option" onclick="selectPayment(this)">
+              <i class="fas fa-money-bill-wave"></i> COD
+            </div>
+          </div>
+        </div>
+        <div class="checkout-summary" id="checkoutSummary"></div>
+        <button class="place-order-btn ripple" onclick="placeOrder()">
+          <i class="fas fa-check-circle"></i> Place Order
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- ======== Order Success Popup ======== -->
+  <div class="success-popup" id="successPopup">
+    <div class="success-content">
+      <div class="success-icon"><i class="fas fa-check"></i></div>
+      <h2>Order Placed Successfully!</h2>
+      <p>Your food is being prepared and will be delivered soon.</p>
+      <p class="success-order-id" id="orderIdDisplay">Order ID: #FV123456</p>
+      <button class="success-close-btn ripple" onclick="closeSuccessPopup()">
+        Continue Ordering
+      </button>
+    </div>
+  </div>
+  <!-- ======== Toast Container ======== -->
+  <div class="toast-container" id="toastContainer"></div>
+  <!-- ======== Back to Top ======== -->
+  <button class="back-to-top" id="backToTop" title="Back to Top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+  <!-- ======== Scripts ======== -->
+  <script src="script.js"></script>
+</body>
+</html>
